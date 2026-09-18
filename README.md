@@ -31,7 +31,22 @@ The numbered steps are computed from a deterministic execution trace by backward
 
 ## Status
 
-Pre-alpha. Nothing works yet. Milestone 1 (the recorder) is in progress. Linux x86-64 only.
+Pre-alpha. Linux x86-64 only.
+
+Milestone 1 (recorder) is done: `whyfault record` single-steps a program under ptrace and writes a `.wft` trace with per-instruction register changes and memory accesses (addresses and values). `whyfault dump`, `info`, and `query` inspect a trace; `query` answers "which step last wrote this register or byte?", the primitive the analyzer is built on. `whyfault explain` is not implemented yet (milestone 2).
+
+```
+$ whyfault record -o t.wft ./prog
+whyfault: recorded 145075 steps to t.wft: Faulted { signal: 11, pc: 0x40193f, fault_addr: Some(0) }
+$ whyfault dump t.wft --last 3
+#145073   0x000000401937  mov [rbp-28h],rax     W[0x7ffd0bb55868]8=0x0000000000000000
+#145074   0x00000040193b  mov rax,[rbp-28h]     R[0x7ffd0bb55868]8=0x0000000000000000
+FAULT   #145075 signal=11 pc=0x40193f addr=0x0
+$ whyfault query t.wft --loc 0x7ffd0bb55870
+[0x7ffd0bb55870] = 0x00, written by step #145051
+```
+
+Recorder speed is roughly 25k to 50k instructions per second; fine for programs that crash within seconds. Known limitations: single-threaded targets only, SSE/AVX register values not recorded, `rep` string ops record one element.
 
 ## Building
 
