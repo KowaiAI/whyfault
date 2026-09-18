@@ -1,0 +1,12 @@
+[package]
+name = "whyfault-decode"
+description = "Instruction decoding into read/write sets for the whyfault analyzer"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+whyfault-trace = { path = "../whyfault-trace" }
+iced-x86.workspace = true
+thiserror.workspace = true

@@ -1,0 +1,9 @@
+fault:     SIGSEGV, read of address 0 in main (main.c:26), via f->count
+root:      parse_header returns -1 at main.c:10 because remaining (3) < 8,
+           leaving h->count at the 0 stored on main.c:9. lookup (main.c:16)
+           treats count==0 as not-found and returns NULL; main dereferences it.
+chain:     f == NULL (main.c:26)
+           <- lookup returned NULL (main.c:16), because h->count == 0
+           <- h->count last written main.c:9 (= 0); main.c:11 never executed
+           <- branch at main.c:10 taken, because remaining (3) < 8
+           <- remaining = 3 (main.c:23, argc == 1 default)

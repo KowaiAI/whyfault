@@ -1,0 +1,15 @@
+[package]
+name = "whyfault-record"
+description = "ptrace-based single-step recorder producing .wft traces"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+whyfault-trace = { path = "../whyfault-trace" }
+whyfault-decode = { path = "../whyfault-decode" }
+anyhow.workspace = true
+nix.workspace = true
+object.workspace = true
+libc = "0.2"

@@ -1,0 +1,21 @@
+[package]
+name = "whyfault"
+description = "Explains why your program crashed, not just where"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "whyfault"
+path = "src/main.rs"
+
+[dependencies]
+whyfault-trace = { path = "../whyfault-trace" }
+whyfault-record = { path = "../whyfault-record" }
+whyfault-decode = { path = "../whyfault-decode" }
+anyhow.workspace = true
+clap.workspace = true
+
+[dev-dependencies]
+tempfile = "3"
