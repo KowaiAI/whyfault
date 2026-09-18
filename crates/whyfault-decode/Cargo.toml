@@ -7,4 +7,6 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
+whyfault-trace = { path = "../whyfault-trace" }
 iced-x86.workspace = true
+thiserror.workspace = true

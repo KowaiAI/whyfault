@@ -8,5 +8,8 @@ repository.workspace = true
 
 [dependencies]
 whyfault-trace = { path = "../whyfault-trace" }
+whyfault-decode = { path = "../whyfault-decode" }
 anyhow.workspace = true
 nix.workspace = true
+object.workspace = true
+libc = "0.2"
